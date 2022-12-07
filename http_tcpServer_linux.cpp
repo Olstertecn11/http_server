@@ -24,6 +24,10 @@ namespace http{
     m_socketAddress_len(sizeof(m_socketAddress)),
     m_serverMessage(buildResponse())
   {
+    m_socketAddress.sin_family = AF_INET;
+    m_socketAddress.sin_port = htons(m_port);
+    m_socketAddress.sin_addr.s_addr = inet_addr(m_ip_address.c_str());
+    std::cout << "port: " << ntohs(m_socketAddress.sin_port) << std::endl;
     if(this->startServer() != 0){
       std::ostringstream ss;
       ss << "failed to start server with PORT: " << ntohs(m_socketAddress.sin_port);
