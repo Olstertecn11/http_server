@@ -11,6 +11,7 @@ namespace http{
   public:
     TcpServer(std::string, int);
     ~TcpServer();
+    void startListen();
   private:
     std::string m_ip_address;
     int m_port;
@@ -22,6 +23,9 @@ namespace http{
     std::string m_serverMessage;
     int startServer();
     void closeServer();
+    void acceptConnection(int &new_socket);
+    std::string buildResponse();
+    void sendResponse();
 };
 }
 
